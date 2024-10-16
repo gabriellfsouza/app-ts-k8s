@@ -96,4 +96,12 @@ kubectl apply -f k8s -n app
 kubectl rollout history deployment/app-ts -n app
 kubectl rollout undo deployment/app-ts -n app #rollout one version
 kubectl rollout undo deployment/app-ts -n app --to-revision=1
+
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml # to install metrics server component
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml --kubelet-insecure-tls # to install metrics server component with insecure tls (for local dev purposes only)
+kubectl get pods -n kube-system | grep metrics-server
+kubectl delete -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+kubectl apply -f k8s/downloads/matrics-server.yaml
+kubectl top pods -n app
 ```
